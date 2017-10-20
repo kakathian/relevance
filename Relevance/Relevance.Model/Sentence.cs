@@ -20,7 +20,7 @@ namespace Relevance.Model
 
         public int GetHashCode(Sentence sentence)
         {
-            return this.GetHashCode() ^ sentence.GetHashCode();
+            return string.IsNullOrWhiteSpace(sentence?.Value) ? sentence.GetHashCode() : sentence.Value.GetHashCode();
         }
     }
 }
