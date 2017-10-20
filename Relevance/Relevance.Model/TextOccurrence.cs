@@ -9,7 +9,7 @@ namespace Relevance.Model
     public class TextOccurrence : IComparable<TextOccurrence>
     {
         public string Value { get; set; }
-        public int Frequency { get; set; }
+        public long Frequency { get; set; }
 
         public virtual int CompareTo(TextOccurrence other)
         {

@@ -15,13 +15,23 @@ namespace Relevance.Console
     {
         static void Main(string[] args)
         {
-            string dataStorePath = Sundry.ReadSetting<string>(ConfigurationSettings.AppSettings["DataStore"]);
+            string dataStorePath = Sundry.ReadSetting<string>("DataStore");
             string text = new TextFileReader().Read(Path.Combine(dataStorePath, "ClimateChange.txt"));
             List<string> words = GetWords(text);
-            Word[] wordCount =  CountWords(words);
-            Array.Sort(wordCount);
+            Word[] referenceWords = CountWords(words);
+            Array.Sort(referenceWords);
 
             List<string> sentences = GetSentences(text);
+            SentenceRanker sentenceRanker = new SentenceRanker();
+            Sentence[] rankedSentences = sentenceRanker.DoRank(sentences, referenceWords);
+            float sentenceTolerance = Sundry.ReadSetting<float>("SentenceTolerance");
+            sentenceTolerance = sentences.Count() * (sentenceTolerance <= 0 ? 1 : sentenceTolerance);
+            if (null != rankedSentences)
+            {
+                Array.Sort(rankedSentences);
+                for (int sentenceIndex = 0; sentenceIndex < sentenceTolerance;)
+                    System.Console.WriteLine(rankedSentences[sentenceIndex++].Value + "\r\n");
+            }
 
             System.Console.Read();
         }

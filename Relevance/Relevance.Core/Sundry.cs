@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -14,9 +15,10 @@ namespace Relevance.Core
             if (!File.Exists(path)) throw new FileNotFoundException();
         }
 
-        public static T ReadSetting<T>(object value)
+        public static T ReadSetting<T>(string key, bool isDefault = true)
         {
-            return (T)Convert.ChangeType(value,typeof(T));
+            if (isDefault && string.IsNullOrWhiteSpace(ConfigurationSettings.AppSettings[key])) return default(T);
+            return (T)Convert.ChangeType(ConfigurationSettings.AppSettings[key], typeof(T));
         }
     }
 }
