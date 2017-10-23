@@ -20,12 +20,16 @@ namespace Relevance.Core.Summary
             tolerance = references.Count() / (tolerance < 1 ? 1 : 5 - tolerance);
 
             Dictionary<string, Word> lookupWords = references.Take(tolerance).ToDictionary(w => w.Value);
+            WordDistinctCriteria wordDistinctCriteria = new WordDistinctCriteria();
             foreach (string sentence in fSentences)
             {
                 long rank = 0;
-                foreach (KeyValuePair<string, string> kvp in wordProcessor.ReadWords(sentence).Distinct().ToDictionary(s => s))
+                HashSet<string> distinctWords = new HashSet<string>();
+                wordProcessor.ReadWords(sentence).ForEach(w => distinctWords.Add(w.ToLower()));
+
+                foreach (string wordKey in distinctWords )
                 {
-                    if (lookupWords.TryGetValue(kvp.Key, out Word hitWord)) rank += hitWord.Frequency;
+                    if (lookupWords.TryGetValue(wordKey, out Word hitWord)) rank += hitWord.Frequency;
                 }
 
                 sentenceRanks.Add(sentence, rank);

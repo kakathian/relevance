@@ -17,8 +17,8 @@ namespace Relevance.Console
         {
             string dataStorePath = Sundry.ReadSetting<string>("DataStore");
             string text = new TextFileReader().Read(Path.Combine(dataStorePath, "ClimateChange.txt"));
-            List<string> words = GetWords(text);
-            Word[] referenceWords = CountWords(words);
+            List<string> rawWords = GetWords(text);
+            Word[] referenceWords = CountWords(rawWords);
             Array.Sort(referenceWords);
 
             List<string> sentences = GetSentences(text);

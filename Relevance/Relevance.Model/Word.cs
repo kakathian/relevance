@@ -12,10 +12,5 @@ namespace Relevance.Model
         {
             return -1 * this.Frequency.CompareTo(other.Frequency);
         }
-
-        public override int GetHashCode()
-        {
-            return string.IsNullOrWhiteSpace(this.Value) ? base.GetHashCode() : this.Value.GetHashCode();
-        }
     }
 }

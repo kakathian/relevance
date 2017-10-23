@@ -41,10 +41,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EnglishWordTrie.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sentence.cs" />
     <Compile Include="TextOccurrence.cs" />
     <Compile Include="Word.cs" />
+    <Compile Include="WordDistinctCriteria.cs" />
+    <Compile Include="WordTrie.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -24,7 +24,11 @@ namespace Relevance.Core.Summary
         {
             List<string> words = new List<string>();
             if (string.IsNullOrWhiteSpace(text)) return words;
-            words.AddRange(Regex.Split(text.Replace(Environment.NewLine.ToString(), " "), @"\W+"));
+            string[] processedWords = Regex.Split(text.Replace(Environment.NewLine.ToString(), " "), @"\W+");
+            foreach (string word in processedWords)
+            {
+                if (!RelevanceContext.Current.StopWordTree.Find(word, RelevanceContext.Current.StopWordTree)) words.Add(word);
+            }            
             return words;
         }
 
