@@ -27,7 +27,7 @@ namespace Relevance.Core.Summary
             string[] processedWords = Regex.Split(text.Replace(Environment.NewLine.ToString(), " "), @"\W+");
             foreach (string word in processedWords)
             {
-                if (!RelevanceContext.Current.StopWordTree.Find(word, RelevanceContext.Current.StopWordTree)) words.Add(word);
+                if (!RelevanceContext.Current.StopWordTree.Find(word.ToLower(), RelevanceContext.Current.StopWordTree)) words.Add(word);
             }            
             return words;
         }

@@ -29,7 +29,8 @@ namespace Relevance.Core.Summary
 
                 foreach (string wordKey in distinctWords )
                 {
-                    if (lookupWords.TryGetValue(wordKey, out Word hitWord)) rank += hitWord.Frequency;
+                    Word hitWord = null;
+                    if (lookupWords.TryGetValue(wordKey, out hitWord)) rank += hitWord.Frequency;
                 }
 
                 sentenceRanks.Add(sentence, rank);

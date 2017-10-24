@@ -29,7 +29,8 @@ namespace Relevance.Model
                 Add(word.Substring(1), root);
             }
 
-            if (root.Nodes.TryGetValue(word[0], out WordTrie node))
+            WordTrie node = null;
+            if (root.Nodes.TryGetValue(word[0], out node))
             {
                 node.Add(word.Substring(1), node);
                 return;
@@ -50,7 +51,8 @@ namespace Relevance.Model
                 if (Find(word.Substring(1), root)) return true;
             }
 
-            if (root.Nodes.TryGetValue(word[0], out WordTrie node))
+            WordTrie node = null;
+            if (root.Nodes.TryGetValue(word[0], out node))
             {
                 if (node.Find(word.Substring(1), node)) return true;
             }

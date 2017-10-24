@@ -16,7 +16,8 @@ namespace Relevance.Core.Summary
 
             foreach (string word in words)
             {
-                if (!wordRanks.TryGetValue(word.ToLower(), out int frequency)) wordRanks.Add(word.ToLower(), 0);
+                int frequency;
+                if (!wordRanks.TryGetValue(word.ToLower(), out frequency)) wordRanks.Add(word.ToLower(), 0);
                 wordRanks[word.ToLower()] += 1;
             }
 
